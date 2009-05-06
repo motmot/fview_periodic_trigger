@@ -16,10 +16,6 @@ class FviewPeriodicTrigger(traited_plugin.HasTraits_FViewPlugin):
 
     traits_view = View(Group(Item(name='Nth_frame')))
 
-    def __init__(self,*args,**kw):
-        super(FviewPeriodicTrigger,self).__init__(*args,**kw)
-        self.trigger_device = None
-
     def set_all_fview_plugins(self,plugins):
         """Get reference to 'FView external trigger' plugin"""
 
