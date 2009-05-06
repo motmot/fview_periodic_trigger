@@ -11,4 +11,5 @@ setup(name='motmot.fview_periodic_trigger',
       entry_points = {
     'motmot.fview.plugins':'fview_periodic_trigger = motmot.fview_periodic_trigger.fview_periodic_trigger:FviewPeriodicTrigger',
     },
+      install_requires = ['motmot.fview>=0.5.3'],
       )
