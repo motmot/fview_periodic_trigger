@@ -11,10 +11,13 @@ from enthought.traits.ui.api import View, Item, Group
 class FviewPeriodicTrigger(traited_plugin.HasTraits_FViewPlugin):
     plugin_name = 'periodic trigger'
     trigger_device = traits.Instance(ttrigger.DeviceModel)
+    enabled = traits.Bool(False)
 
     Nth_frame = traits.Int(100)
 
-    traits_view = View(Group(Item(name='Nth_frame')))
+    traits_view = View(Group(Item(name='Nth_frame'),
+                             Item(name='enabled'),
+                             ))
 
     def set_all_fview_plugins(self,plugins):
         """Get reference to 'FView external trigger' plugin"""
@@ -29,14 +32,15 @@ class FviewPeriodicTrigger(traited_plugin.HasTraits_FViewPlugin):
             raise RuntimeError('this plugin requires "FView external trigger"')
 
     def process_frame(self,cam_id,buf,buf_offset,timestamp,framenumber):
-        if framenumber%self.Nth_frame == 0:
-            if self.trigger_device is not None:
+        if self.enabled:
+            if framenumber%self.Nth_frame == 0:
+                if self.trigger_device is not None:
 
-                 # fire pulse on EXT_TRIG1
-                self.trigger_device.ext_trig1 = True
+                    # fire pulse on EXT_TRIG1
+                    self.trigger_device.ext_trig1 = True
 
-                 # toggle LED
-                self.trigger_device.led1 = not self.trigger_device.led1
+                    # toggle LED
+                    self.trigger_device.led1 = not self.trigger_device.led1
 
         draw_points = []
         draw_linesegs = []
