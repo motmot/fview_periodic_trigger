@@ -25,6 +25,8 @@ class FviewPeriodicTrigger(traited_plugin.HasTraits_FViewPlugin):
         for plugin in plugins:
             if plugin.get_plugin_name()=='FView external trigger':
                 self.trigger_device = plugin.trigger_device
+        if self.trigger_device is None:
+            raise RuntimeError('this plugin requires "FView external trigger"')
 
     def process_frame(self,cam_id,buf,buf_offset,timestamp,framenumber):
         if framenumber%self.Nth_frame == 0:
