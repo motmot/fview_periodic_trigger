@@ -26,7 +26,7 @@ From :ref:`fview-plugin-tutorial-histogram`, you should have a working
 knowledge of how to create a Python package directory structure and a
 setup.py file with the appropriate entry point to make an FView
 plugin. Therefore, this tutorial will focus only on the unique aspects
-of change-based triggering.
+of periodic triggering.
 
 Create the plugin logic
 =======================
